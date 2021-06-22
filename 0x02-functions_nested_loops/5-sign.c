@@ -1,15 +1,10 @@
 #include "holberton.h"
-
 /**
-* print_sign - checks if the number is pos or neg or 0
-* @n: is an int delivered from main.c
-*
-* Description: Uses headers to link to another function and checks sign
-* Probably could just do an easy bit check for the first bit field
-* but cant check for 0 using but fields
-* Return: int 0 when done and no errors
-*/
-
+ * print_sign - Print the sign of a number
+ * @n: type int integer, can be negative or positive
+ * Description: print +, 0, or - depending on number, along with return
+ * Return: 1 if +, 0 if 0, and -1 if -
+ */
 int print_sign(int n)
 {
 	if (n > 0)
