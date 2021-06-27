@@ -1,4 +1,5 @@
 #include "holberton.h"
+#include <stdio.h>
 
 /**
 * _isupper - returns 1 if uppercase, 0 if not
