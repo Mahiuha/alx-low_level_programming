@@ -1,14 +1,25 @@
 #include "holberton.h"
-#include <stdio.h>
 
 /**
- * main - check the code for Holberton School students.
- *
- * Return: Always 0.
+ * largest_number - returns the largest of 3 numbers
+ * @a: first int
+ * @b: second int
+ * @c: third int
+ * Return: largest number
  */
-int main(void)
+
+int largest_number(int a, int b, int c)
 {
-    printf("%d\n", mul(98, 1024));
-    printf("%d\n", mul(-402, 4096));
-    return (0);
+	int largest = b;
+
+	if (a > b)
+	{
+		largest = a;
+	}
+	else if (c > b)
+	{
+		largest = c;
+	}
+
+	return (largest);
 }
