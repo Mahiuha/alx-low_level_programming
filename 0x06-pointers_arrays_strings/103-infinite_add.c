@@ -1,78 +1,83 @@
 #include "holberton.h"
 
+char *add_strings(char *n1, char *n2, char *r, int r_index);
+char *infinite_add(char *n1, char *n2, char *r, int size_r);
+
 /**
-* infinite_add - a function that adds two numbers
-* @n1: a char pointer given by main that represents a num
-* @n2: a char pointer given by main that represents a num
-* @r: a buffer given by main
-* @size_r: the buffer size given by main
-*
-* Description: a function that adds numbers that are passed
-*	as a strings and we add them up
-* Return: the result to char *r
-* A: count up how long both n1 and n2 is
-* C: A counter is 1 more than the index numbers so we need to decrement by 1
-* D: if the buffer size given is less than the size of i or j
-*	then we want to return 0 which signals main error
-* E: we sum and append the last digit. we will need to swap later
-*	we loop from the last indices and go until size_r
-* F: We add up the index of n1[i] and n2[j]
-* G: if i and j are negative we break out of the loop because we have
-*	iterated through all the character arrays and there is nothing left
-* H: Simple overflow handling. we want the last digit and if we had
-*	a number with a 1 in the tens digit we store that in tens
-*	we then incluide that 1 in the sum and move on
-* I: We had to swap because at step E we added and made our r[k]
-*	array from the end to the beginning instead of to the beginning
-*	to the end. this helped us deal with carry on ints but
-*	the downside is we need to swap later on which is tedious.
-*	another way of going forward to back and not having to deal with swaps
-*	would be a complex r[i-1] += 1 type of situation but that can be
-*	iffy with out of bounds array issues and some other stuff
-* J: So if we had k reach the size_r but we still had more i and j indicies
-*	to add then that is an error and we didnt finish so return 0
-* K: k was our buffer size counter. so it is only fitting we had to put the
-*	last char with the k counter as the null char. then we k--
-*	so we can start at the very last index right next tot the null char
-*/
+ * add_strings - Adds the numbers stored in two strings.
+ * @n1: The string containing the first number to be added.
+ * @n2: The string containing the second number to be added.
+ * @r: The buffer to store the result.
+ * @r_index: The current index of the buffer.
+ *
+ * Return: If r can store the sum - a pointer to the result.
+ *         If r cannot store the sum - 0.
+ */
+
+char *add_strings(char *n1, char *n2, char *r, int r_index)
+{
+	int num, tens = 0;
+
+	for (; *n1 && *n2; n1--, n2--, r_index--)
+	{
+		num = (*n1 - '0') + (*n2 - '0');
+		num += tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	for (; *n1; n1--, r_index--)
+	{
+		num = (*n1 - '0') + tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	for (; *n2; n2--, r_index--)
+	{
+		num = (*n2 - '0') + tens;
+		*(r + r_index) = (num % 10) + '0';
+		tens = num / 10;
+	}
+
+	if (tens && r_index >= 0)
+	{
+		*(r + r_index) = (tens % 10) + '0';
+		return (r + r_index);
+	}
+
+	else if (tens && r_index < 0)
+		return (0);
+
+	return (r + r_index + 1);
+}
+/**
+ * infinite_add - Adds two numbers.
+ * @n1: The first number to be added.
+ * @n2: The second number to be added.
+ * @r: The buffer to store the result.
+ * @size_r: The buffer size.
+ *
+ * Return: If r can store the sum - a pointer to the result.
+ *         If r cannot store the sum - 0.
+ */
 
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int i = 0, j = 0, k = 0;
-	int sum = 0;
-	int tens = 0;
-	int begin = 0;
-	int swap = 0;
+	int index, n1_len = 0, n2_len = 0;
 
-	while (n1[i] != 0)/* A */
-		i++;
-	while (n2[j] != 0)
-		j++;
-	i--;/* C */
-	j--;
-	if (i > size_r || j > size_r)/* D */
+	for (index = 0; *(n1 + index); index++)
+		n1_len++;
+
+	for (index = 0; *(n2 + index); index++)
+		n2_len++;
+
+	if (size_r <= n1_len + 1 || size_r <= n2_len + 1)
 		return (0);
-	for ( ; k < size_r; i--, j--, k++)/* E */
-	{
-		sum = tens;
-		if (i >= 0)/* F */
-			sum += n1[i] - '0';
-		if (j >= 0)
-			sum += n2[j] - '0';
-		if (i < 0 && j < 0 && sum == 0)/* G */
-			break;
-		tens = sum / 10;/* H */
-		r[k] = sum % 10 + '0';
-	}
-	if (i >= 0 || j >= 0 || sum > 0)/* J */
-		return (0);
-	r[k] = '\0';/* K */
-	k--;
-	for ( ; begin < k; k--, begin++)/* I */
-	{
-		swap = r[k];
-		r[k] = r[begin];
-		r[begin] = swap;
-	}
-	return (r);
+
+	n1 += n1_len - 1;
+	n2 += n2_len - 1;
+	*(r + size_r) = '\0';
+
+	return (add_strings(n1, n2, r, --size_r));
 }
