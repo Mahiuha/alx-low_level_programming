@@ -1,21 +1,36 @@
 #include "holberton.h"
-/**
- * *leet - encodes a string into 1337
- *
- * @c: char to check
- *
- * Return: 0 is success
- */
-char *leet(char *c)
-{
-	char a[] = "aeotlAEOTL";
-	char b[] = {'4', '3', '0', '7', '1',
-		    '4', '3', '0', '7', '1'};
-	int x, y;
 
-	for (x = 0; c[x] != '\0'; x++)
-		for (y = 0; a[y] != '\0'; y++)
-			if (c[x] == a[y])
-				c[x] = b[y];
-	return (c);
+/**
+* leet - a function that encodes a string into 1337
+* @s: a pointer string given by main
+*
+* Description: changes 'let' to '137' o to 0
+* Return: the char array
+*/
+
+char *leet(char *s)
+{
+	int i = 0;
+	int j;
+	int array[10][2] = {{97, 52},
+	{65, 52},
+	{101, 51},
+	{69, 51},
+	{108, 49},
+	{76, 49},
+	{111, 48},
+	{79, 48},
+	{116, 55},
+	{84, 55}};/* AELOT */
+
+	while (s[i] != 0)
+	{
+		for (j = 0 ; j < 10; j++)
+		{
+			if (s[i] == array[j][0])
+				s[i] = array[j][1];
+		}
+		i++;
+	}
+	return (s);
 }
