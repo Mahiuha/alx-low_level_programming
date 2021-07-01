@@ -1,27 +1,23 @@
 #include "holberton.h"
-
 /**
-* _strcat - appends the second string to the first
-* @dest: a pointer given by the main function
-* @src: a pointer given by the main function
-*
-* Description: Uses headers to link and pointers to achieve goal
-* Return: returns the pointer s1 or dest.
-*/
-
+ * *_strcat - appends the src string to the dest string
+ *
+ * @dest: char to check
+ * @src: char to check
+ * Description: This will append the src string to the dest string
+ * Return: a pointer to the resulting string dest
+ */
 char *_strcat(char *dest, char *src)
 {
-	int counter;
-	int counterSRC = 0;
-	int i;
-	int j = 0;
+	int i, j;
 
-	while (dest[counter] != 0)
-		counter++;
-	while (src[counterSRC] != 0)
-		counterSRC++;
-
-	for (i = counter; i < counter + counterSRC; i++, j++)
+	for (i = 0; dest[i] != '\0'; i++)
+	{
+	}
+	for (j = 0; src[j] != '\0'; j++, i++)
+	{
 		dest[i] = src[j];
+	}
+
 	return (dest);
 }
