@@ -1,46 +1,42 @@
-#include "holberton.h"
+#include <stdio.h>
 #include <stdlib.h>
-
+#include "holberton.h"
 /**
- * argstostr - concatenates all the arguments of your program
- * @ac: argument count in main
- * @av: arguments passed to main
- *
- * Return: Pointer
+ * argstostr - main entry
+ * @ac: int input
+ * @av: double pointer array
+ * Return: 0
  */
 char *argstostr(int ac, char **av)
 {
-	char *s;
-	int l, lt, i, j, k;
+	int i, n, k = 0, len = 0;
+	char *str;
 
 	if (ac == 0 || av == NULL)
-		return (0);
-	l = 0, k = 0;
+		return (NULL);
+
 	for (i = 0; i < ac; i++)
 	{
-		lt = 0;
-		while (av[i][lt])
-			lt++;
-		l += lt + 1;
+		for (n = 0; av[i][n]; n++)
+			len++;
 	}
-	s = malloc((l + 1) * sizeof(char));
+	len += ac;
 
-	if (s == 0)
-		return (0);
+	str = malloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
 
-	for (j = 0; j < ac; j++)
+	for (i = 0; i < ac; i++)
 	{
-		lt = 0;
-		while (av[j][lt])
+		for (n = 0; av[i][n]; n++)
 		{
-			*(s + k) = av[j][lt];
+			str[k] = av[i][n];
 			k++;
-			lt++;
 		}
-		*(s + k) = '\n';
-		k++;
+		if (str[k] == '\0')
+		{
+			str[k++] = '\n';
+		}
 	}
-	*(s + k) = '\0';
-
-	return (s);
+	return (str);
 }
