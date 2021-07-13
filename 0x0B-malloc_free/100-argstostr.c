@@ -1,47 +1,60 @@
 #include "holberton.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 /**
- * argstostr - function to cat all arguments of a program
- *
- * @ac: arg count
- * @av: arg vector
- * Return: pointer to new string or NULL if failed
+ * _strlen - Get the length of an string
+ * @s: string
+ * Return: length of s
  */
+int _strlen(char *s)
+{
+	int i;
 
+	for (i = 0; s[i] != 00; i++)
+	{
+	}
+	return (i);
+}
+/**
+ * argstostr - this funcion will concatenates all the arguments
+ * @ac: number of arguments
+ * @av: the arguments
+ * Return: contatenated arguments
+ */
 char *argstostr(int ac, char **av)
 {
-	int len, index, str;
-	char *dest;
+	char *ptr;
+	int var, c, j, k;
 
 	if (ac == 0 || av == NULL)
-		return (NULL);
-
-	for (len = 0, index = 0, str = 0; index < ac; index++)
 	{
-		while (av[index][str])
-		{
-			len++;
-			str++;
-		}
+		return (NULL);
 	}
 
-	dest = malloc(len + ac + 1);
-
-	if (dest == NULL)
-		return (NULL);
-
-	for (index = 0, len = 0; index < ac; index++)
+	for (c = 0; c < ac; c++)
 	{
-		for (str = 0; av[index][str]; str++)
-		{
-			dest[len] = av[index][str];
-			len++;
-		}
-		dest[len] = '\n';
-		len++;
+		var = var + _strlen(av[c]);
 	}
-	dest[len] = '\0';
-	return (dest);
+
+	ptr = malloc((var + ac + 1) * sizeof(char));
+	if (ptr == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+
+	var = 0;
+
+	for (j = 0; j < ac; j++)
+	{
+		for (k = 0; av[j][k] != '\0'; k++)
+		{
+			ptr[var] = av[j][k];
+			var++;
+		}
+
+		ptr[var] = '\n';
+		var++;
+	}
+	return (ptr);
 }
