@@ -3,56 +3,46 @@
 #include <stdlib.h>
 
 /**
- * argstostr - function that concatenates all the arguments of your program
- * @ac: argument count
- * @av: argument vector
- * Return: 0
+ * argstostr - concatenates all arguments into a string
+ * @ac: number of arguments
+ * @av: array containing arguments
+ *
+ * Return: pointer to new string of concatenated args
+ * or NULL on failure (includes ac == 0, av == NULL)
  */
+
 char *argstostr(int ac, char **av)
 {
-	char *ptr, *beginning;
-	int i, len = 0, j;
+	int x, arg_len, i;
+	char *str;
+
+	i = 0;
 
 	if (ac == 0 || av == NULL)
-	{
 		return (NULL);
+
+	for (i = 0; i <= ac; i++)
+	{
+		for (x = 0; av[i][x] != '\0'; x++)
+			arg_len++;
+		arg_len++; /* add space for null */
 	}
+
+	str = malloc(sizeof(char *) * (i + 1));
+
+	if (str == NULL)
+		return (NULL);
+
 	for (i = 0; i < ac; i++)
 	{
-		len += 1 + _strlen(av[i]);
-	}
-	ptr = malloc(sizeof(char) * (len + 1));
-	beginning = ptr;
-	if (ptr == NULL)
-	{
-		return (NULL);
-	}
-	if (ptr)
-	{
-		for (i = 0; i < ac; i++)
+		for (x = 0; av[i][x] != '\0'; x++)
 		{
-			for (j = 0; av[i][j]; j++)
-			{
-				*ptr++ = av[i][j];
-			}
-			*ptr++ = '\n';
-		}
-		ptr = '\0';
+			str[i] = av[i][x];
+			i++;
+		str[x] = '\n';
+		x++;
 	}
-	return (beginning);
-}
-/**
- * _strlen - returns string length
- * @s: string
- * Return: strlen
-*/
-int _strlen(char *s)
-{
-	int string;
+	str[x] = '\0';
 
-	for (string = 0; string[s] != '\0'; string++)
-	{
-		;
-	}
-	return (string);
+	return (str);
 }
