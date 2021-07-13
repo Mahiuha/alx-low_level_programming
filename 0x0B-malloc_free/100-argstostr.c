@@ -1,37 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "holberton.h"
+#include <stdlib.h>
 /**
- * argstostr - concatenates all of the arguments of the program
- * @ac: count of arguments given to program
- * @av: values fed into program
- * Return: concatenated string
+ * argstostr - copies the arguments from argv to a single string
+ * @ac: count of arguments
+ * @av: pointer to strings
+ * Return: NULL if size == 0, a pointer to the array, null if
+ * the memory allocation fails
  */
 char *argstostr(int ac, char **av)
 {
-	int i, j, k = 0, n = 0;
-	char *s = NULL;
+	int a, b, c, d, cont = 0;
+	char *str, *str2;
 
-	if ((ac == 0) || (av == NULL))
+	if (ac == 0 || *av == NULL)
 		return (NULL);
-
-	for (i = 0; i < ac; i++)
-		for (j = 0; av[i][j]; j++)
-		{
-			n++;
-		}
-
-	s = (char *)malloc((n + ac + 1) * sizeof(char));
-	if (s == NULL)
-		return (NULL);
-
-	for (i = 0; i < ac; i++)
+	for (a = 0; a < ac; a++)
 	{
-		for (j = 0; av[i][j]; j++)
-			s[k++] = av[i][j];
-		s[k++] = '\n';
+		for (b = 0; av[a][b] != '\0'; b++)
+		{
+			cont++;
+		}
+	cont++;
 	}
-	s[k] = '\0';
-
-	return (s);
+	cont += 1;
+	str = malloc(sizeof(char) * cont);
+	str2 = str;
+	for (c = 0; c < ac; c++)
+	{
+		for (d = 0; av[c][d] != '\0'; d++)
+		{
+			*str = av[c][d];
+			str++;
+		}
+	*str = '\n';
+	str++;
+	}
+return (str2);
 }
