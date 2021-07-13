@@ -1,44 +1,47 @@
+#include "holberton.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * argstostr - concatenates all the arguments of your program
- * @ac: argument count
- * @av: argument vector
- * Return: char
+ * argstostr - function to cat all arguments of a program
+ *
+ * @ac: arg count
+ * @av: arg vector
+ * Return: pointer to new string or NULL if failed
  */
 
 char *argstostr(int ac, char **av)
 {
-char *ar, *str;
-int i, j, cont;
-if (ac == 0 || av == NULL)
-return (NULL);
-for (i = 0; i < ac; i++)
-{
-j = 0;
-while (av[i][j] != '\0')
-{
-j++;
-cont++;
-}
-cont++;
-}
-cont += 1;
-ar = malloc(cont *sizeof(char));
-if (ar == NULL)
-return (NULL);
-str = ar;
-for (i = 0; i < ac; i++)
-{
-j = 0;
-while (av[i][j] != '\0')
-{
-*ar = av[i][j];
-j++;
-ar++;
-}
-*ar = '\n';
-ar++;
-}
-return (str);
+	int len, index, str;
+	char *dest;
+
+	if (ac == 0 || av == NULL)
+		return (NULL);
+
+	for (len = 0, index = 0, str = 0; index < ac; index++)
+	{
+		while (av[index][str])
+		{
+			len++;
+			str++;
+		}
+	}
+
+	dest = malloc(len + ac + 1);
+
+	if (dest == NULL)
+		return (NULL);
+
+	for (index = 0, len = 0; index < ac; index++)
+	{
+		for (str = 0; av[index][str]; str++)
+		{
+			dest[len] = av[index][str];
+			len++;
+		}
+		dest[len] = '\n';
+		len++;
+	}
+	dest[len] = '\0';
+	return (dest);
 }
