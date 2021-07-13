@@ -1,41 +1,47 @@
 #include "holberton.h"
 #include <stdlib.h>
-#include <stdio.h>
+
 /**
-  * argstostr - function that concatenates all the arguments of your program.
-  * @ac: argument count
-  * @av: argument 'strings'
-  * Return: conct
-  */
+ * argstostr - concatenates all alrgumensts
+ * @ac: argument counts
+ * @av: argumanets to concatenate
+ * Return: pointer to new string || NULL on fail
+ */
 
 char *argstostr(int ac, char **av)
 {
-	char *conct;
-	int i, ii, j = 0;
+	int size, idx, sum;
+	int size1, idx1, sum1;
+	char *concat;
 
-	if (ac == 0 || av == NULL)
-		return (NULL);
-
-	for (i = 0; i < ac; i++)
+	if (ac == 0)
 	{
-		for (ii = 0; av[i][ii] != '\0'; ii++)
+		return (NULL);
+	}
+	if (av == NULL)
+	{
+		return (NULL);
+	}
+	for (size = 0, sum = 0; av[size] != NULL; size++)
+	{
+		for (idx = 0; av[size][idx] != '\0'; idx++)
 		{
-			j++;
+			sum += 1;
 		}
 	}
-	conct = malloc(sizeof(char) * j + ac + 1);
-	if (conct == NULL)
-		return (NULL);
-
-	j = 0;
-	for (i = 0; i < ac; i++)
+	concat = malloc(sizeof(char) * (ac + (sum + 1)));
+	if (concat == NULL)
 	{
-		for (ii = 0; av[i][ii] != '\0'; ii++, j++)
-		{
-			conct[j] = av[i][ii];
-		}
-		conct[j] = '\n';
-		j++;
+		return (NULL);
 	}
-	return (conct);
+	for (size1 = 0, sum1 = 0; av[size1] != NULL; size1++, sum1++)
+	{
+		for (idx1 = 0; av[size1][idx1] != '\0'; idx1++, sum1++)
+		{
+			concat[sum1] = av[size1][idx1];
+		}
+		concat[sum1] = '\n';
+	}
+	concat[sum1] = '\0';
+	return (concat);
 }
