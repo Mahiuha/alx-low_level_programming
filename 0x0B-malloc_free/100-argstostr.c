@@ -2,46 +2,45 @@
 #include <stdlib.h>
 
 /**
- * argstostr - concatenates all alrgumensts
- * @ac: argument counts
- * @av: argumanets to concatenate
- * Return: pointer to new string || NULL on fail
+ * argstostr - concatenates all the arguments of your program
+ * @ac: argument count in main
+ * @av: arguments passed to main
+ *
+ * Return: Pointer
  */
-
 char *argstostr(int ac, char **av)
 {
-	int size, idx, sum;
-	int size1, idx1, sum1;
-	char *concat;
+	char *s;
+	int l, lt, i, j, k;
 
-	if (ac == 0)
+	if (ac == 0 || av == NULL)
+		return (0);
+	l = 0, k = 0;
+	for (i = 0; i < ac; i++)
 	{
-		return (NULL);
+		lt = 0;
+		while (av[i][lt])
+			lt++;
+		l += lt + 1;
 	}
-	if (av == NULL)
+	s = malloc((l + 1) * sizeof(char));
+
+	if (s == 0)
+		return (0);
+
+	for (j = 0; j < ac; j++)
 	{
-		return (NULL);
-	}
-	for (size = 0, sum = 0; av[size] != NULL; size++)
-	{
-		for (idx = 0; av[size][idx] != '\0'; idx++)
+		lt = 0;
+		while (av[j][lt])
 		{
-			sum += 1;
+			*(s + k) = av[j][lt];
+			k++;
+			lt++;
 		}
+		*(s + k) = '\n';
+		k++;
 	}
-	concat = malloc(sizeof(char) * (ac + (sum + 1)));
-	if (concat == NULL)
-	{
-		return (NULL);
-	}
-	for (size1 = 0, sum1 = 0; av[size1] != NULL; size1++, sum1++)
-	{
-		for (idx1 = 0; av[size1][idx1] != '\0'; idx1++, sum1++)
-		{
-			concat[sum1] = av[size1][idx1];
-		}
-		concat[sum1] = '\n';
-	}
-	concat[sum1] = '\0';
-	return (concat);
+	*(s + k) = '\0';
+
+	return (s);
 }
