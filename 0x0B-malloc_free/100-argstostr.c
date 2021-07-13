@@ -1,50 +1,41 @@
 #include "holberton.h"
-#include <stdio.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
- * *argstostr - convert arguments on command line to strings
- * @ac: int type
- * @av: pointer to array
- * Return: arguments as strings
- */
+  * argstostr - function that concatenates all the arguments of your program.
+  * @ac: argument count
+  * @av: argument 'strings'
+  * Return: conct
+  */
 
 char *argstostr(int ac, char **av)
 {
-	int size, count, count1, count2 = 0;
-	char *ptr;
+	char *conct;
+	int i, ii, j = 0;
 
 	if (ac == 0 || av == NULL)
-	{
 		return (NULL);
-	}
 
-	for (count = 0; count < ac; count++)
+	for (i = 0; i < ac; i++)
 	{
-		for (count1 = 0; av[count][count1] != '\0'; count1++)
+		for (ii = 0; av[i][ii] != '\0'; ii++)
 		{
-			size += 1;
+			j++;
 		}
-		size += 1;
 	}
-	size += 1;
-
-	ptr = malloc(sizeof(char) * size);
-	if (ptr == NULL)
-	{
-		free(ptr);
+	conct = malloc(sizeof(char) * j + ac + 1);
+	if (conct == NULL)
 		return (NULL);
-	}
-	for (count = 0; count < ac; count++)
+
+	j = 0;
+	for (i = 0; i < ac; i++)
 	{
-		for (count1 = 0; av[count][count1] != '\0'; count1++)
+		for (ii = 0; av[i][ii] != '\0'; ii++, j++)
 		{
-			ptr[count2] = av[count][count1];
-			count2++;
+			conct[j] = av[i][ii];
 		}
-		ptr[count2] = '\n';
-		count2++;
+		conct[j] = '\n';
+		j++;
 	}
-	ptr[count2] = '\0';
-	return (ptr);
+	return (conct);
 }
