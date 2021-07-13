@@ -29,30 +29,34 @@
 
 char *argstostr(int ac, char **av)
 {
-	int i;
-	int j;
-	int k = 0;
-	int total = 0;
-	char *pointer;
+	char *str;
+	int arg, byte, index, size = ac;
 
-	if (ac == 0 || av == NULL)/* A */
+	if (ac == 0 || av == NULL)
 		return (NULL);
-	for (i = 0; i < ac; i++)/* B */
-		for (j = 0; av[i][j]; j++)
-			total++;
-	pointer = (char *) malloc(sizeof(char) * (total + ac + 1));/* C */
-	if (pointer == NULL)/* D */
+
+	for (arg = 0; arg < ac; arg++)
 	{
-		free(pointer);
+		for (byte = 0; av[arg][byte]; byte++)
+			size++;
+	}
+
+	str = malloc(sizeof(char) * size + 1);
+
+	if (str == NULL)
 		return (NULL);
-	}
-	for (i = 0; i < ac; i++)/* E */
+
+	index = 0;
+
+	for (arg = 0; arg < ac; arg++)
 	{
-		for (j = 0; av[i][j]; j++, k++)/* F */
-			pointer[k] = av[i][j];
-		pointer[k] = '\n';/* G */
-		k++;
+		for (byte = 0; av[arg][byte]; byte++)
+			str[index++] = av[arg][byte];
+
+		str[index++] = '\n';
 	}
-	pointer[k] = '\0';/* H */
-	return (pointer);
+
+	str[size] = '\0';
+
+	return (str);
 }
