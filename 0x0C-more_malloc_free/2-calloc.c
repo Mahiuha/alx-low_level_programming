@@ -2,46 +2,29 @@
 #include <stdlib.h>
 
 /**
-* makeitzero - helper function that assigns 0 to all
-* @pointer: the ponter. it will increment its address position
-* @product: the counter basically
+* _calloc - allocates memory for an array, using malloc.
+* @nmemb: Elements of the array.
+* @size: Number of bytes.
 *
-* Description: loops through the void array and makes everyhting 0
-*	the array was void but it was casted and passed in as a char
-* Return: nothing it is void
+* Return: To the value of pointer.
 */
-
-void makeitzero(char *pointer, int product)
-{
-	if (product)
-	{
-		*pointer = 0;
-		makeitzero(pointer + 1, product - 1);
-	}
-}
-
-/**
-* _calloc - a function that allocates memory for an array using malloc
-* @nmemb: how many elements
-* @size:the sizeof data type
-*
-* Description: allocates memory and behaves like the calloc function
-*	make our own bootleg version. makes array of nmemb elements
-*	of byte size size. and returns that pointer. set memory to 0
-* Return: a pointer or null if errors
-*/
-
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *pointer;
-	int product;
+unsigned int i;
+char *e;
 
-	product = nmemb * size;
-	if (size <= 0 || nmemb <= 0)
+	if (nmemb == 0 || size == 0)
+	{
 		return (NULL);
-	pointer = malloc(product);
-	if (pointer == NULL)
+	}
+	e = malloc(sizeof(char) * nmemb * size);
+	if (e == NULL)
+	{
 		return (NULL);
-	makeitzero(pointer, product);
-	return (pointer);
+	}
+	for (i = 0; i < (nmemb * size); i++)
+	{
+		e[i] = 0;
+	}
+return (e);
 }
