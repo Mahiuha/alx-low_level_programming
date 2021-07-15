@@ -2,32 +2,50 @@
 #include <stdlib.h>
 
 /**
- * _calloc - Allocates memory for an array of a certain number
- *           of elements each of an inputted byte size.
- * @nmemb: The number of elements.
- * @size: The byte size of each array element.
- *
- * Return: If nmemb = 0, size = 0, or the function fails - NULL.
- *         Otherwise - a pointer to the allocated memory.
+ * _calloc - prints buffer in hexa
+ * @nmemb: the address of memory to print
+ * @size: the size of the memory to print
+ * Return: Nothing.
  */
+
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *mem;
-	char *filler;
-	unsigned int index;
+	void *ptr;
 
-	if (nmemb == 0 || size == 0)
+	if (size == 0 || nmemb == 0)
+	{
 		return (NULL);
-
-	mem = malloc(size * nmemb);
-
-	if (mem == NULL)
+	}
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+	{
 		return (NULL);
-
-	filler = mem;
-
-	for (index = 0; index < (size * nmemb); index++)
-		filler[index] = '\0';
-
-	return (mem);
+	}
+	if (ptr == NULL)
+		return (NULL);
+	_memset(ptr, 0, nmemb * size);
+	return (ptr);
 }
+#include "holberton.h"
+
+/**
+ * *_memset - check the code for Holberton School students.
+ * @s: Starting address of memory to be filled.
+ * @b: Value to be filled.
+ * @n: Number of bytes to be filled starting from ptr to be filled.
+ * Return: Char.
+ */
+
+char *_memset(char *s, char b, unsigned int n)
+{
+	unsigned int idx = 0;
+	char *a = s;
+
+	while (idx < n)
+	{
+		a[idx] = b;
+		idx++;
+	}
+	return (a);
+}
+
