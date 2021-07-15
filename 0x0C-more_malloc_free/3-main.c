@@ -32,7 +32,7 @@ void simple_print_buffer(int *buffer, unsigned int size)
 }
 
 /**
- * main - check the code for ALX School students.
+ * main - check the code for Holberton School students.
  *
  * Return: Always 0.
  */

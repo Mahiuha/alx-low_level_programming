@@ -1,46 +1,75 @@
+#include "holberton.h"
 #include <stdlib.h>
 
 /**
- * string_nconcat - function that concatenates two strings
- * @s1: input string 1
- * @s2: input string 2
- * @n: first n bytes
- * Return: char
- */
+* string_nconcat - a function that concats two strings
+* @s1: a string given by main
+* @s2: a string given by main
+* @n: the length given by main.
+*
+* Description: return a pointer that points to new space in memory
+*	which contains s1 and the first n bytes of s2 and a null term
+*	if n is >= s2 then print it all
+* Return: the pointer to the allocated memory
+*/
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *ptr;
+	char *pointer;
 	unsigned int i = 0;
-	unsigned int i2 = 0;
+	unsigned int j = 0;
+	unsigned int k = 0;
 
 	if (s1 == NULL)
 		s1 = "";
 	if (s2 == NULL)
 		s2 = "";
-	while (s1[i] != '\0')
+	while (s1[i])
 		i++;
-	while (s2[i2] != '\0')
-		i2++;
-	i2++;
-	if (n >= i2)
-		n = i2;
-	ptr = malloc(sizeof(*ptr) * n + (i + 1));
-	if (ptr == NULL)
+	while (s2[j])
+		j++;
+	if (n >= j)
+		pointer = malloc((i + j + 2) * sizeof(char));
+	if (n < j)
+		pointer = malloc((i + n + 1) * sizeof(char));
+	if (pointer == NULL)
 		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	if (n >= j)
 	{
-		ptr[i] = s1[i];
-		i++;
+		i = 0;
+		while (s1[i])
+		{
+			pointer[k] = s1[i];
+			i++;
+			k++;
+		}
+		j = 0;
+		while (s2[j])
+		{
+			pointer[k] = s2[j];
+			j++;
+			k++;
+		}
+		pointer[k] = '\0';
 	}
-	i2 = 0;
-	while (s2[i2] != '\0' && i2 < n)
+	else
 	{
-		ptr[i] = s2[i2];
-		i++;
-		i2++;
+		i = 0;
+		while (s1[i])
+		{
+			pointer[k] = s1[i];
+			i++;
+			k++;
+		}
+		j = 0;
+		while (n)
+		{
+			pointer[k] = s2[j];
+			n--;
+			j++;
+			k++;
+		}
+		pointer[k] = '\0';
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (pointer);
 }
