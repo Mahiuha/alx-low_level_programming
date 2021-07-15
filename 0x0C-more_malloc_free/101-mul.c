@@ -1,72 +1,44 @@
 #include "holberton.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
-* main - multiplies two positive numbers
-* @argc: number of arguments
-* @argv: the values in each argc element
-*
-* Description: its like infinite add but with multiplication
-* Return: print the result. return 0 if success
-*/
+ * isnum - checks for a digit.
+ * @s: An ascii char to compare
+ * Return: Always 0.
+ */
+int isnum(char *s)
+{
+	int i;
 
-# IF EITHER NUMBER ARE ZERO RETURN 0;
-##SHOULD CHECK IF BEGINNING LEADING NUMBER IS ZERO. 
-
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+	}
+	return (1);
+}
+/**
+ * main - multiplies two large numbers
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: Error or 0 if is correct
+ */
 
 int main(int argc, char **argv)
 {
-	int size1 = 0;
-	int size2 = 0;
-	int product_size = 0;
-	int product = 0;
-	int overflow = 0;
-	int index = 0;
-	int tab = 0;
 
-	while (argv[1][size1])//strlength and checks if digit
+	if (argc != 3)
 	{
-		ISDIGIT\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\##################
-		size1++;
+		printf("Error\n");
+		exit(98);
 	}
-	while (argv[2][size2])//strlength and checks if digit
+	if (!isnum(argv[1]) && !isnum(argv[2]))
 	{
-		ISITADIGIT########################################################
-		size2++;
+		printf("Error\n");
+		exit(98);
 	}
-	product_size = size1 + size2 + 1;//calculate the range we need
-	product = malloc(sizeof(char) * product_size);//allocates space
-	if (!product)
-		return (98);
-	while (product_size >= 0)//initialize all to 0
-		product[product_size] = '0';
-	size1--;//because length is 1 more than index
-	size2--;
-	while (size2 >= 0)
-	{
-		index = tab;
-		for (j = size1; j >= 0; j--)
-		{
-			product = (argv[1][j]-'0') * (argv[2][size2]-'0');
-			product += product[index] -'0';
-			product += overflow;
-			overflow = product / 10;
-			product[index] = product % 10 + '0';
-			index++;
-		}
-		if (overflow)
-		{
-			product[index] = overflow;
-			index++;
-		}
-		overflow = 0;
-		size2--;
-		tab++;
-	}
-	product[index] ='\0';
-	reversestring\\\\\###########################################################
-	printf("%s\n", product);
-	free(product);
+	printf("%d\n", atoi(argv[2]) * atoi(argv[1]));
 	return (0);
 }
+
