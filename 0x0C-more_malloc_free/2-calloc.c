@@ -1,47 +1,35 @@
 #include "holberton.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
-* makeitzero - helper function that assigns 0 to all
-* @pointer: the ponter. it will increment its address position
-* @product: the counter basically
-*
-* Description: loops through the void array and makes everyhting 0
-*	the array was void but it was casted and passed in as a char
-* Return: nothing it is void
-*/
-
-void makeitzero(char *pointer, int product)
-{
-	if (product)
-	{
-		*pointer = 0;
-		makeitzero(pointer + 1, product - 1);
-	}
-}
-
-/**
-* _calloc - a function that allocates memory for an array using malloc
-* @nmemb: how many elements
-* @size:the sizeof data type
-*
-* Description: allocates memory and behaves like the calloc function
-*	make our own bootleg version. makes array of nmemb elements
-*	of byte size size. and returns that pointer. set memory to 0
-* Return: a pointer or null if errors
-*/
-
+ * _calloc - allocates memory for an array using malloc
+ *
+ * @nmemb: number of elements we want to allocate a space in memory
+ * @size: is the size in bytes of each of those elements
+ *
+ * Return: a pointer to newlly alocated memory or null if fail
+ */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *pointer;
-	int product;
-
-	product = nmemb * size;
-	if (size <= 0 || nmemb <= 0)
+	/* unsigned int for 'a' to make the comparisson with size and nmemb */
+	/* *ptr needs to be char because on the main the array is char type */
+	unsigned int a;
+	char *ptr;
+	/* first the task condition */
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	pointer = malloc(product);
-	if (pointer == NULL)
+	/* I already have the numbers of elements and the bytes size */
+	/* so I dont use sizeof because we have size */
+	/* multiply both variables and we have the necesary space to allocate */
+	ptr = malloc(nmemb * size);
+	/* check the allocation works and set the task condition */
+	if (ptr == NULL)
 		return (NULL);
-	makeitzero(pointer, product);
-	return (pointer);
+	/* if I were using calloc it would set the pointer to 0 */
+	/* but I must set the pointer to 0 using malloc */
+	/* so we need 'a' that is the elements of the new pointer allocated */
+	for (a = 0; a < nmemb * size; a++)
+		/* set the pointer to 0 */
+		ptr[a] = 0;
+	return (ptr);
 }
