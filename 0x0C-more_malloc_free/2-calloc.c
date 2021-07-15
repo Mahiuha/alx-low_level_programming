@@ -1,51 +1,47 @@
 #include "holberton.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
- *
- * Return: Nothing.
- */
-void simple_print_buffer(char *buffer, unsigned int size)
-{
-    unsigned int i;
+* makeitzero - helper function that assigns 0 to all
+* @pointer: the ponter. it will increment its address position
+* @product: the counter basically
+*
+* Description: loops through the void array and makes everyhting 0
+*	the array was void but it was casted and passed in as a char
+* Return: nothing it is void
+*/
 
-    i = 0;
-    while (i < size)
-    {
-        if (i % 10)
-        {
-            printf(" ");
-        }
-        if (!(i % 10) && i)
-        {
-            printf("\n");
-        }
-        printf("0x%02x", buffer[i]);
-        i++;
-    }
-    printf("\n");
+void makeitzero(char *pointer, int product)
+{
+	if (product)
+	{
+		*pointer = 0;
+		makeitzero(pointer + 1, product - 1);
+	}
 }
 
 /**
- * main - check the code for ALX School students.
- *
- * Return: Always 0.
- */
-int main(void)
+* _calloc - a function that allocates memory for an array using malloc
+* @nmemb: how many elements
+* @size:the sizeof data type
+*
+* Description: allocates memory and behaves like the calloc function
+*	make our own bootleg version. makes array of nmemb elements
+*	of byte size size. and returns that pointer. set memory to 0
+* Return: a pointer or null if errors
+*/
+
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-    char *a;
+	void *pointer;
+	int product;
 
-    a = _calloc(98, sizeof(char));
-    strcpy(a, "Holberton");
-    strcpy(a + 9, " School! :)\n");
-    a[97] = '!';
-    simple_print_buffer(a, 98);
-    free(a);
-    return (0);
+	product = nmemb * size;
+	if (size <= 0 || nmemb <= 0)
+		return (NULL);
+	pointer = malloc(product);
+	if (pointer == NULL)
+		return (NULL);
+	makeitzero(pointer, product);
+	return (pointer);
 }
-
