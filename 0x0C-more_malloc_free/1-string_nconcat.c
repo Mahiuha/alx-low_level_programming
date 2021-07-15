@@ -1,75 +1,56 @@
-#include "holberton.h"
 #include <stdlib.h>
-
 /**
-* string_nconcat - a function that concats two strings
-* @s1: a string given by main
-* @s2: a string given by main
-* @n: the length given by main.
-*
-* Description: return a pointer that points to new space in memory
-*	which contains s1 and the first n bytes of s2 and a null term
-*	if n is >= s2 then print it all
-* Return: the pointer to the allocated memory
+* size - Gets the size of a string.
+* @str: String to evaluate.
+* Return: Length of the given string.
 */
+unsigned int size(char *str)
+{
+	unsigned int len = 0;
 
+	while (*str++)
+		len++;
+
+	return (len);
+}
+/**
+* string_nconcat - Concatenates two strings.
+* @s1: First string.
+* @s2: Second string.
+* @n: Number of characters to copy from second string.
+* Return: Pointer to new string, NULL on failure.
+*/
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *pointer;
-	unsigned int i = 0;
-	unsigned int j = 0;
-	unsigned int k = 0;
+	unsigned int Ls1, Ls2, Lt;
+	char *conc, *tmp;
 
-	if (s1 == NULL)
+	if (!s1)
 		s1 = "";
-	if (s2 == NULL)
+	Ls1 = size(s1);
+
+	if (!s2)
 		s2 = "";
-	while (s1[i])
-		i++;
-	while (s2[j])
-		j++;
-	if (n >= j)
-		pointer = malloc((i + j + 2) * sizeof(char));
-	if (n < j)
-		pointer = malloc((i + n + 1) * sizeof(char));
-	if (pointer == NULL)
-		return (NULL);
-	if (n >= j)
-	{
-		i = 0;
-		while (s1[i])
-		{
-			pointer[k] = s1[i];
-			i++;
-			k++;
-		}
-		j = 0;
-		while (s2[j])
-		{
-			pointer[k] = s2[j];
-			j++;
-			k++;
-		}
-		pointer[k] = '\0';
-	}
+	Ls2 = size(s2);
+
+	if (n >= Ls2)
+		Lt = Ls1 + Ls2 + 1;
 	else
-	{
-		i = 0;
-		while (s1[i])
-		{
-			pointer[k] = s1[i];
-			i++;
-			k++;
-		}
-		j = 0;
-		while (n)
-		{
-			pointer[k] = s2[j];
-			n--;
-			j++;
-			k++;
-		}
-		pointer[k] = '\0';
-	}
-	return (pointer);
+		Lt = Ls1 + n + 1;
+
+	conc = malloc(Lt);
+	if (!conc)
+		return (0);
+
+	tmp = conc;
+	Lt -= (Ls1 + 1);
+	while (*s1)
+		*tmp++ = *s1++;
+
+	while (Lt--)
+		*tmp++ = *s2++;
+
+	*tmp = '\0';
+
+	return (conc);
 }
