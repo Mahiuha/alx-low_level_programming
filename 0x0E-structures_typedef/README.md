@@ -1,5 +1,6 @@
-#!/bin/bash
-Tasks for this project:
+
+# Tasks for this project:
+
 0. Define a new type struct dog with the following elements: name, age and owner
 1. Write a function that initialize a variable of type struct dog
 2. Write a function that prints a struct dog
