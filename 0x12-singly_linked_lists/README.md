@@ -50,7 +50,7 @@
 <li>You are allowed to use the <code>printf</code> function</li>
 </ul>
 
-<p> Advance 101: Write a 64-bit program in assembly that prints <code>Hello, Holberton</code>, followed by a new line.</p>
+<p> Advance 101: Write a 64-bit program in assembly that prints <code>Hello, Holberton</code>, followed by a new line</p>
 <ul>
 <li>You are only allowed to use the <code>printf</code> function</li>
 <li>You are not allowed to use interrupts</li>
