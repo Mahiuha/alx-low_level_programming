@@ -11,14 +11,14 @@
 <li>How to build and use linked lists</li>
 </ul>
 
-<h2>Holberton Requirements</h2>
+<h2>Project Requirements</h2>
 
 <h3>General</h3>
 
 <ul>
 <li>Allowed editors: <code>vi</code>, <code>vim</code>, <code>emacs</code></li>
-<li>All your files will be compiled on Ubuntu 14.04 LTS</li>
-<li>Your programs and functions will be compiled with <code>gcc 4.8.4</code> using the flags <code>-Wall</code> <code>-Werror</code> <code>-Wextra</code> <code>and -pedantic</code></li>
+<li>All your files will be compiled on Ubuntu 20.04 LTS</li>
+<li>Your programs and functions will be compiled with <code>gcc 4.8.4</code> using the flags <code>-Wall</code> <code>-Werror</code> <code>-Wextra</code> <code>and -pedantic</code> <code>-std=gnu89</code></li>
 <li>All your files should end with a new line</li>
 <li>A <code>README.md</code> file, at the root of the folder of the project is mandatory</li>
 <li>Your code should use the <code>Betty</code> style. It will be checked using <a href="https://github.com/holbertonschool/Betty/blob/master/betty-style.pl" title="betty-style.pl" target="_blank">betty-style.pl</a> and <a href="https://github.com/holbertonschool/Betty/blob/master/betty-doc.pl" title="betty-doc.pl" target="_blank">betty-doc.pl</a></li>
@@ -50,7 +50,7 @@
 <li>You are allowed to use the <code>printf</code> function</li>
 </ul>
 
-<p> Advance 101: Write a 64-bit program in assembly that prints <code>Hello, Holberton</code>, followed by a new line.</p>
+<p> Advance 101: Write a 64-bit program in assembly that prints <code>Hello, Holberton</code>, followed by a new line</p>
 <ul>
 <li>You are only allowed to use the <code>printf</code> function</li>
 <li>You are not allowed to use interrupts</li>
