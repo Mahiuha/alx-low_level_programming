@@ -1,30 +1,32 @@
 #include "holberton.h"
+
 /**
- * num_to_binary - convert decimal to binary
- * @n: decimal to convert
- * Description: recursive function
- * Return: void
- */
-void num_to_binary(unsigned long int n)
-{
-	if (n)
-	{
-		/* n is shifted by 1 bit */
-		num_to_binary(n >> 1);
-		_putchar((n & 1) + '0');
-	}
-}
-/**
- * print_binary - prints the binary representation of a number
- * @n: unsigned long int to turn to binary
- * Return: void
- */
+* print_binary - prints deci to binary
+* @n: the int we want converted
+*
+* Description: prints binary representation of a number
+* Return: nothing it is void
+*/
+
 void print_binary(unsigned long int n)
 {
-	if (n)
+	unsigned long int temp = n;
+	int count = 0;
+	int i;
+
+	if (n == 0)
+		_putchar ('0');
+	while (temp > 0)
 	{
-		num_to_binary(n);
+		temp = temp >> 1;
+		count++;
 	}
-	else
-		_putchar('0');
+	for (count -= 1; count >= 0; count--)
+	{
+		i = n >> count;
+		if (i & 1)
+			_putchar('1');
+		else
+			_putchar('0');
+	}
 }
