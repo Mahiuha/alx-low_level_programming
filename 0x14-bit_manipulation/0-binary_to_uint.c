@@ -1,39 +1,37 @@
 #include "holberton.h"
-
+#include "main.h"
 /**
-* binary_to_uint - binary to unsigned int
-* @b: the binary string we are given
-*
-* Description: does stuff via binary and bit manipulation
-* Return: 0 is error or the converted number
-*/
+ * binary_to_uint - convert binary to decimal.
+ * @b: the binary number in string format
+ * Description: convert binary to decimal
+ * section header: the header of this function is header.h
+ * Return: this return the convert number.
+ */
 
 unsigned int binary_to_uint(const char *b)
 {
-	int i = 0;
-	unsigned int sendback = 1;
-	unsigned int store = 0;
-	int count = 0;
-	int j = 0;
+	unsigned int result, base;
+	int i;
+
+	result = 0;
+	i = 0;
+	base = 1;
 
 	if (!b)
 		return (0);
-	while (b[i])
+
+	while (*(b + i))
 	{
-		if (b[i] < 48 || b[i] > 49)
+		if (*(b + i) != '0' && *(b + i) != '1')
 			return (0);
 		i++;
 	}
-
-	for (count = 0; i >= 0; i--, count++)
+	for (i--; i >= 0; i--)
 	{
-		sendback = 1;
-		if (b[i] == '1')
-		{
-			for (j = 0; j < count - 1; j++)
-				sendback *= 2;
-			store += sendback;
-		}
+		if (*(b + i) == '1')
+			result = result + base;
+		base = base * 2;
 	}
-	return (store);
+
+	return (result);
 }

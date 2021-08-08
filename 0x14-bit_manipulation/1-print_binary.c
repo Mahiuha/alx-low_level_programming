@@ -1,32 +1,30 @@
-#include "holberton.h"
-
+#include "main.h"
 /**
-* print_binary - prints deci to binary
-* @n: the int we want converted
-*
-* Description: prints binary representation of a number
-* Return: nothing it is void
-*/
-
+ * print_binary - decimal to binary without use / %
+ * @n: the decimal
+ * Description: convert decimal to binary
+ * section header: the header of this function is holberton.h
+ * Return: no return
+ */
 void print_binary(unsigned long int n)
 {
-	unsigned long int temp = n;
-	int count = 0;
-	int i;
+	int flag = 0;
+	unsigned long int mask = 1;
 
+	mask <<= 63;
 	if (n == 0)
-		_putchar ('0');
-	while (temp > 0)
+		_putchar('0');
+
+	while (mask > 0)
 	{
-		temp = temp >> 1;
-		count++;
-	}
-	for (count -= 1; count >= 0; count--)
-	{
-		i = n >> count;
-		if (i & 1)
-			_putchar('1');
-		else
+		if ((n & mask) == 0 && flag == 1)
 			_putchar('0');
+		if ((n & mask) != 0)
+		{
+			_putchar('1');
+			flag = 1;
+		}
+
+		mask = mask >> 1;
 	}
 }
