@@ -1,28 +1,33 @@
+#include "main.h"
 #include "holberton.h"
+
 /**
- * create_file - creates a file
- * @text_content: null terminated string to write to the file
- * @filename: name of the file to created
- * Return: 1 in success, -1 in failure
+ *  create_file - create a file and write in it
+ * @filename:file to be created
+ * @text_content: content of the file created
+ * Return: 1 or -1;
  */
 int create_file(const char *filename, char *text_content)
 {
-	int fd, size;
-	/* task condition */
-	if (!filename)
-		return (-1);
-	/* rw------- permission if it exist truncate it*/
-	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
-	if (fd == -1)
+	int fd, len, w;
+
+	if (filename == NULL)
 		return (-1);
 
-	if (text_content)
+	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 00600);
+	if (fd == -1)
 	{
-		/* for write we need the size */
-		for (size = 0; text_content[size] != '\0'; size++)
-			;
-		/*  ssize_t write(int fd, const void *buf, size_t count); */
-		write(fd, text_content, size);
+		return (-1);
+	}
+	if (text_content != NULL)
+	{
+		for (len = 0; text_content[len] != '\0'; len++)
+		;
+		w = write(fd, text_content, len);
+	}
+	if (w == -1)
+	{
+		return (-1);
 	}
 	close(fd);
 	return (1);

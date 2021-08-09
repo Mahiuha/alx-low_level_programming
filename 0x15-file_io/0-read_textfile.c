@@ -1,32 +1,45 @@
+#include "main.h"
 #include "holberton.h"
 /**
- * read_textfile - reads a text file and prints it to the POSIX strdout
- * @letters: the number of letters it should read and print
- * @filename: pointer to the file
- * Return: the actual number of letters it could read and print or 0
+ * read_textfile - read a file.
+ * @filename: the file to read.
+ * @letters: the number of chars to read
+ * Description: read a file
+ * section header: the header of this function is holberton.h
+ * Return: this return the number of chars.
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t chars;
-	int fd;
-	char *buf;
+	int fd, _read, _write;
+	char *buffer;
 
-	if (!filename)
+	if (filename == NULL)
 		return (0);
-	fd = open(filename, O_RDONLY);
+
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
+		return (0);
+
+	fd = open(filename, O_RDONLY, 600);
 	if (fd == -1)
+	{
+		free(buffer);
 		return (0);
-	buf = malloc(letters * sizeof(char));
-	if (!buf)
+	}
+	_read = read(fd, buffer, letters);
+	if (_read == -1)
+	{
+		free(buffer);
 		return (0);
+	}
 
-	chars = read(fd, buf, letters);
-	if (chars < 0)
+	_write = write(STDOUT_FILENO, buffer, _read);
+	if (_write == -1 || _write != _read)
+	{
 		return (0);
-	chars = write(STDOUT_FILENO, buf, chars);
-	if (chars < 0)
-		return (0);
-	free(buf);
+	}
+
+	free(buffer);
 	close(fd);
-	return (chars);
+	return (_write);
 }
