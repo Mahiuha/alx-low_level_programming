@@ -3,7 +3,7 @@
 <p><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/03/DLL1.png" alt="" style\="" /></p>
 
 
- <h2>Resources</h2>
+ <h2>Resources.</h2>
 
 <p><strong>Read or watch</strong>:</p>
 
