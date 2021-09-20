@@ -1,6 +1,6 @@
-#ifndef LIBRARY
-#define LIBRARY
-
+#ifndef _DYNAMIC_L_
+#define _DYNAMIC_L_
+#include <stdlib.h>
 
 int _putchar(char c);
 int _islower(int c);
@@ -23,5 +23,4 @@ unsigned int _strspn(char *s, char *accept);
 char *_strpbrk(char *s, char *accept);
 char *_strstr(char *haystack, char *needle);
 
-
-#endif
+#endif /* _DYNAMIC_L_ */
