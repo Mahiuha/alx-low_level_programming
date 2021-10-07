@@ -1,6 +1,6 @@
 <h1 class="gap">Project 0x18. C - Dynamic libraries</h1>
 
-<h2>Learning Objectives</h2>
+<h2>Learning Objectives.</h2>
 <h3>General</h3>
 
 <ul>
@@ -10,7 +10,7 @@
 <li>Basic usage <code>nm</code>, <code>ldd</code>, <code>ldconfig</code></li>
 </ul>
 
-<h2>Resources</h2>
+<h2>Resources.</h2>
 
 <p><strong>Read or watch</strong>:</p>
 
