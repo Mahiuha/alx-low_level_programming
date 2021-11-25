@@ -2,5 +2,5 @@ all: holberton
 
 .PHONY: all
 
-holberton: main.c holberton.c m.h
+holberton: main.c school.c m.h
 	gcc main.c holberton.c -o holberton
