@@ -1,4 +1,4 @@
-all: holberton
+all: school
 
 .PHONY: all
 
