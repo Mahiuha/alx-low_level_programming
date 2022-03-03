@@ -27,8 +27,8 @@ Each directory contains the low level projects and code that I've written during
 | [0x13. More singly linked lists ](./0x13-more_singly_linked_lists) | Objects, Scopes and Closures |
 | [0x14. Bit manipulation ](./0x14-bit_manipulation) | Web scraping |
 | [0x15. File input/optput ](./0x15-file_io) | Web jQuery |
-| [0x17. Doubly linked lists ](./0x17-doubly_linked_lists) | Network #1 |
-| [0x18. Dynamic libraries ](./0x18-dynamic_libraries) | Objects, Scopes and Closures |
+| [0x17. Doubly linked lists ](./0x17-doubly_linked_lists) | doubly linked list node structure for ALX project |
+| [0x18. Dynamic libraries ](./0x18-dynamic_libraries) | What is a dynamic library, how does it work, how to create one, and how to use it |
 | [0x1A. Hash tables ](./0x1A-hash_tables) | Web scraping |
 | [0x1C. Makefiles ](./0x1C-makefiles) | Web jQuery |
 | [0x1E. Search algorithms ](./0x1E-search_algorithms) | Network #1 |
